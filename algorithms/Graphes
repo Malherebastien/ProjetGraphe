@@ -1,0 +1,29 @@
+class Graphes:
+    """La classe principale :"""
+
+
+def glouton(s):
+    """
+    L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
+    systématiquement le sommet le plus proche que l’on n’a pas encore
+    visité
+    :param s : Un sommet aléatoire
+    :return : La liste L correspondant au circuit hamiltonien obtenu à partir du sommet
+    """
+
+def optimiseGlou(L):
+    """
+    Prends en entrée le circuit L est décroise, si le décroisement est avantageux, tous
+    les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
+    couple d’arêtes croisées.
+    :param L: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())
+    :return: void
+    """
+
+def pvcPrim(s):
+    """
+    Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
+    un arbre couvrant de poids minimun, en utilisant l’algorithme de Prim
+    :param s: Un sommet s du graphe
+    :return: Le cycle hamiltonien du graphe
+    """
