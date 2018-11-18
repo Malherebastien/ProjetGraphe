@@ -1,29 +1,39 @@
 class Graphes:
     """La classe principale :"""
 
+    def __index__(self, nb_point, x, y, matrice_dimension):
+        """
+        nb_point : le nombre de point
+        x, y : Les coordonées des points
+        matrice_dimension : La matrice des dimensions N*N définie par D[i,j] contenant la distance euclidiènne en Pi et Pj
+        """
+        self.nb_point = nb_point
+        self.x = x
+        self.y = y
+        self.matrice_dimension = matrice_dimension
 
-def glouton(s):
-    """
-    L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
-    systématiquement le sommet le plus proche que l’on n’a pas encore
-    visité
-    :param s : Un sommet aléatoire
-    :return : La liste L correspondant au circuit hamiltonien obtenu à partir du sommet
-    """
+    def glouton(self, sommet):
+        """
+        L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
+        systématiquement le sommet le plus proche que l’on n’a pas encore
+        visité
+        :param sommet : Un sommet aléatoire
+        :return : La liste L correspondant au circuit hamiltonien obtenu à partir du sommet
+        """
 
-def optimiseGlou(L):
-    """
-    Prends en entrée le circuit L est décroise, si le décroisement est avantageux, tous
-    les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
-    couple d’arêtes croisées.
-    :param L: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())
-    :return: void
-    """
+    def optimiseGlou(self, circuit):
+        """
+        Prends en entrée le circuit L est décroise, si le décroisement est avantageux, tous
+        les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
+        couple d’arêtes croisées.
+        :param circuit: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())
+        :return: void
+        """
 
-def pvcPrim(s):
-    """
-    Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
-    un arbre couvrant de poids minimun, en utilisant l’algorithme de Prim
-    :param s: Un sommet s du graphe
-    :return: Le cycle hamiltonien du graphe
-    """
+    def pvcPrim(self, sommet):
+        """
+        Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
+        un arbre couvrant de poids minimun, en utilisant l’algorithme de Prim
+        :param sommet: Un sommet s du graphe
+        :return: Le cycle hamiltonien du graphe
+        """
