@@ -1,15 +1,14 @@
 class Graphes:
     """La classe principale :"""
 
-    def __index__(self, nb_point, x, y, matrice_dimension):
+    def __init__(self, nb_point, points, matrice_dimension):
         """
         nb_point : le nombre de point
-        x, y : Les coordonées des points
+        points : liste de points
         matrice_dimension : La matrice des dimensions N*N définie par D[i,j] contenant la distance euclidiènne en Pi et Pj
         """
         self.nb_point = nb_point
-        self.x = x
-        self.y = y
+        self.points = points
         self.matrice_dimension = matrice_dimension
 
     def glouton(self, sommet):
@@ -19,6 +18,14 @@ class Graphes:
         visité
         :param sommet : Un sommet aléatoire
         :return : La liste L correspondant au circuit hamiltonien obtenu à partir du sommet
+        """
+        visite = [self.nb_point][self.nb_point]
+
+    def plus_proche_sommet(self, sommet):
+        """
+        parcours pour trouver les sommets les plus proches et renvoi un tableau des sommets (en excluant lui-même)
+        :param sommet:
+        :return: liste de sommet, rangés dans l'ordre croissant de leur distance
         """
 
     def optimiseGlou(self, circuit):
