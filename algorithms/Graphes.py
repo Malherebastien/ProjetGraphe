@@ -15,32 +15,37 @@ class Graphes:
         self.nb_point = nb_point
         self.points = points
         self.matrice_dimension = matrice_dimension
+        self.chemins = []
 
-    def glouton(self, sommet: Point):
+    def glouton(self, sommet):
         """
         L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
         systématiquement le sommet le plus proche que l’on n’a pas encore
         visité
-        :param sommet : Un sommet aléatoire
+        :param sommet : Un sommet aléatoire duquel on commence, représenté par son indice dans le tableau
         :return : La liste L correspondant au circuit hamiltonien obtenu à partir du sommet
         """
-        visite = np.zeros((self.nb_point, self.nb_point))
-        print(self.plus_proche_sommet(sommet))
+        visite = [sommet]
+        prochain_sommet = sommet
+        while len(visite) < self.nb_point:
+            for x in self.plus_proche_sommet(prochain_sommet):
+                if not visite.__contains__(x):
+                    visite.append(x)
+        print(visite)
+        return visite
 
-    def plus_proche_sommet(self, sommet: Point):
+    def plus_proche_sommet(self, sommet):
         """
         parcours pour trouver les sommets les plus proches et renvoi un tableau des sommets (en excluant lui-même)
         :param sommet: Point
         :return: liste de sommet, rangés dans l'ordre croissant de leur distance
         """
-        print(self.matrice_dimension[sommet.point_id])
         sommets = []
-        dimensions = sorted(self.matrice_dimension[sommet.point_id])
-        print(dimensions)
+        dimensions = sorted(self.matrice_dimension[sommet])
         for i in dimensions:
-            for j in self.matrice_dimension[sommet.point_id]:
+            for j in self.matrice_dimension[sommet]:
                 if i == j:
-                    sommets.append(self.matrice_dimension[sommet.point_id].tolist().index(i))
+                    sommets.append(self.matrice_dimension[sommet].tolist().index(i))
         return sommets
 
     def optimise_glou(self, circuit):

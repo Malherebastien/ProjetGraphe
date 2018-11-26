@@ -10,9 +10,6 @@ while x < nb_point:
     points.append(Point(x, np.random.randint(0, 1000) / 1000, np.random.randint(0, 1000) / 1000))
     x = x + 1
 
-for p in points:
-    print(str(p.x) + " , " + str(p.y))
-
 
 def remplir_matrice():
     matrice = np.full((nb_point, nb_point), np.inf)
@@ -31,4 +28,4 @@ def remplir_matrice():
 
 
 graphe = Graphes(nb_point, points, remplir_matrice())
-graphe.glouton(points[0])
+graphe.glouton(0)
