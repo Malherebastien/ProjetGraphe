@@ -10,7 +10,7 @@ class Graphes:
         nb_point : le nombre de point
         points : liste de points
         matrice_dimension : La matrice des dimensions N*N définie par D[i,j]
-        contenant la distance euclidiènne en Pi et Pj
+        contenant la distance euclidienne en Pi et Pj
         """
         self.nb_point = nb_point
         self.points = points
