@@ -50,7 +50,7 @@ class Graphes:
 
     def optimise_glou(self, circuit):
         """
-        Prends en entrée le circuit L est décroise, si le décroisement est avantageux, tous
+        Prends en entrée le circuit L et décroise, si le décroisement est avantageux, tous
         les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
         couple d’arêtes croisées.
         :param circuit: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())

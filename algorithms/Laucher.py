@@ -1,5 +1,5 @@
-from algorithms.Point import *
 from algorithms.Graphes import *
+from algorithms.Fenetre import*
 import numpy as np
 
 points = []
@@ -27,5 +27,6 @@ def remplir_matrice():
     return matrice
 
 
+fenetre = Fenetre(points)
 graphe = Graphes(nb_point, points, remplir_matrice())
-graphe.glouton(0)
+fenetre.relier_arc(graphe.glouton(0))
