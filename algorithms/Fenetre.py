@@ -14,8 +14,9 @@ class Fenetre:
         self.tab_point = tab_point
 
         for point in tab_point:
-            self.canvas.create_oval(point.x * 300 - 5, point.y * 300 - 5, point.x * 300 + 5, point.y * 300 + 5,
+            self.canvas.create_oval(point.x * 300 - 7, point.y * 300 - 7, point.x * 300 + 7, point.y * 300 + 7,
                                     fill="black")
+            self.canvas.create_text(point.x * 300, point.y * 300, text=point.point_id, fill="white")
 
     def relier_arc(self, tab_liaisons):
         for i in range(1, len(tab_liaisons)):
