@@ -27,10 +27,11 @@ class Graphes:
         """
         visite = [sommet]
         prochain_sommet = sommet
-        while len(visite) < self.nb_point:
+        for i in range(0, self.nb_point):
             for x in self.plus_proche_sommet(prochain_sommet):
                 if not visite.__contains__(x):
                     visite.append(x)
+                    prochain_sommet = x
         print(visite)
         return visite
 
@@ -42,6 +43,7 @@ class Graphes:
         """
         sommets = []
         dimensions = sorted(self.matrice_dimension[sommet])
+        print(dimensions)
         for i in dimensions:
             for j in self.matrice_dimension[sommet]:
                 if i == j:
