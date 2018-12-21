@@ -1,6 +1,7 @@
 import numpy as np
 from algorithms.Point import *
 
+
 class Graphes:
     """La classe principale :"""
 
@@ -15,6 +16,7 @@ class Graphes:
         self.points = points
         self.matrice_dimension = matrice_dimension
         self.chemins = []
+        self.poids_total = 0
 
     def glouton(self, sommet):
         """
@@ -32,9 +34,9 @@ class Graphes:
                 if not self.chemins.__contains__(x):
                     self.chemins.append(x)
                     prochain_sommet = x
-                    print(prochain_sommet)
+                    # print(prochain_sommet)
                     break
-        print(self.chemins)
+        # print(self.chemins)
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[self.chemins[i]].x - self.points[self.chemins[i+1]].x)**2 +
                                   (self.points[self.chemins[i]].y - self.points[self.chemins[i+1]].y)**2)
@@ -49,13 +51,16 @@ class Graphes:
         """
         sommets = []
         dimensions = sorted(self.matrice_dimension[sommet])
-        print(self.matrice_dimension[sommet])
+        # print(self.matrice_dimension[sommet])
         for i in dimensions:
             for j in self.matrice_dimension[sommet]:
                 if i == j:
                     sommets.append(self.matrice_dimension[sommet].tolist().index(i))
+                    self.poids_total += self.matrice_dimension[sommet].tolist().index(i)
+                    # print(self.poids_total)
         return sommets
 
+    ''''''
     def optimise_glou(self):
         """
         Prends en entrée le circuit L et décroise, si le décroisement est avantageux, tous
@@ -75,12 +80,12 @@ class Graphes:
                             print("application")
                             self.chemins = self.echange_sommet(i, j)
                             changement += 1
-            #break
-        print(self.chemins)
+            # break
+        # print(self.chemins)
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[self.chemins[i]].x - self.points[self.chemins[i+1]].x)**2 +
                                   (self.points[self.chemins[i]].y - self.points[self.chemins[i+1]].y)**2)
-        print(somme)
+        # print(somme)
         return self.chemins
 
     def est_croise(self, i, j):
@@ -109,16 +114,15 @@ class Graphes:
         det4 = cdx * cby - cdy * cbx
 
         if det1 * det2 < 0 and det3 * det4 < 0:
-            print("entrée dans le if")
+            # print("entrée dans le if")
             if self.long_chemin(self.chemins) > self.long_chemin(self.echange_sommet(i, j)):
-                print(self.long_chemin(self.chemins), " > ", self.long_chemin(self.echange_sommet(i, j)), " vrai")
+                # print(self.long_chemin(self.chemins), " > ", self.long_chemin(self.echange_sommet(i, j)), " vrai")
                 self.echange_sommet(i, j)
                 return 1
             else:
                 return 0
         else:
             return 0
-
 
     def echange_sommet(self, index1, index2):
         """
@@ -128,11 +132,11 @@ class Graphes:
         :return: liste des sommets réarangée
         """
         tab = self.chemins
-        print("lol -> ", self.chemins)
+        # print("lol -> ", self.chemins)
         temp = tab[index1]
         tab[index1] = tab[index2]
         tab[index2] = temp
-        print("lol -> ", self.chemins)
+        # print("lol -> ", self.chemins)
         return tab
 
     def long_chemin(self, tab):
