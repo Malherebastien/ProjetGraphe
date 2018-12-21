@@ -3,7 +3,7 @@ from algorithms.Fenetre import*
 import numpy as np
 
 points = []
-nb_point = 10
+nb_point = 20
 
 x = 0
 while x < nb_point:
@@ -29,4 +29,4 @@ def remplir_matrice():
 
 fenetre = Fenetre(points)
 graphe = Graphes(nb_point, points, remplir_matrice())
-fenetre.relier_arc(graphe.glouton(0))
+fenetre.afficher_totale(graphe.glouton(0))
