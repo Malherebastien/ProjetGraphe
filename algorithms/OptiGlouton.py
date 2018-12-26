@@ -27,7 +27,6 @@ class OptiGlouton(Graphes):
                             print("application", i, " et ", j)
                             self.chemins = self.echange_sommet(i, j)
                             changement += 1
-            #break
         # print(self.chemins)
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[self.chemins[i]].x - self.points[self.chemins[i+1]].x)**2 +

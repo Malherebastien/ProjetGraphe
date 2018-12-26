@@ -27,21 +27,4 @@ class Glouton(Graphes):
             somme += np.math.sqrt((self.points[self.sortie_glou[i]].x - self.points[self.sortie_glou[i+1]].x)**2 +
                                   (self.points[self.sortie_glou[i]].y - self.points[self.sortie_glou[i+1]].y)**2)
         print(somme)
-        return self.optimise_glou()
-
-    def plus_proche_sommet(self, sommet): #glouton
-        """
-        parcours pour trouver les sommets les plus proches et renvoi un tableau des sommets (en excluant lui-même)
-        :param sommet: Point
-        :return: liste de sommet, rangés dans l'ordre croissant de leur distance
-        """
-        sommets = []
-        dimensions = sorted(self.matrice_dimension[sommet])
-        # print(self.matrice_dimension[sommet])
-        for i in dimensions:
-            for j in self.matrice_dimension[sommet]:
-                if i == j:
-                    sommets.append(self.matrice_dimension[sommet].tolist().index(i))
-                    # self.poids_total += self.matrice_dimension[sommet].tolist().index(i)
-                    # print(self.poids_total)
-        return sommets
+        return self.sortie_glou
