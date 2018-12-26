@@ -44,7 +44,7 @@ class Graphes:
         print(somme)
         return self.optimise_glou()
 
-    def plus_proche_sommet(self, sommet): #glouton
+    def plus_proche_sommet(self, sommet): #classe mère
         """
         parcours pour trouver les sommets les plus proches et renvoi un tableau des sommets (en excluant lui-même)
         :param sommet: Point
@@ -61,14 +61,12 @@ class Graphes:
                     #print(self.poids_total)
         return sommets
 
-    ''''''
     def optimise_glou(self): #opti_glou
         """
         Prends en entrée le circuit L et décroise, si le décroisement est avantageux, tous
         les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
         couple d’arêtes croisées.
-        :param circuit: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())
-        :return: void
+        :return: le tableau optimisé
         """
 
         for i in range(0, len(self.sortie_glou)):
@@ -96,7 +94,8 @@ class Graphes:
     def est_croise(self, i, j): #opti_glou
         """
         Prend en entrée l'index d'un sommet et renvoit regarde si les arcs formés avec ses dus successeurs sont croisée
-        :param index: index du sommet
+        :param i: index du sommet du premier arc
+        :param j: index du sommet du second arc
         :return: 1 si les arcs sont croisés, 0 sinon
         """
         abx = self.points[self.chemins[i+1]].x - self.points[self.chemins[i]].x
@@ -129,8 +128,8 @@ class Graphes:
     def echange_sommet(self, index1, index2): #opti_glou
         """
         Prends en entrée le tableau de sommets et un index, la valeur de l'index donné est inversé avec le suivant
-        :param sommets: Tableau des sommets triés par glouton
-        :param index: index de la valeur à échanger avec la suivante
+        :param index1: index du premier somment du premier arc du croisement
+        :param index2: index du premier somment du second arc du croisement
         :return: liste des sommets réarangée
         """
         tab = []
@@ -151,8 +150,8 @@ class Graphes:
             temp = tab[i]
             tab[i] = tab[k]
             tab[k] = temp
-            i+=1
-            k-=1
+            i += 1
+            k -= 1
 
         return tab
 
@@ -169,7 +168,6 @@ class Graphes:
                                   (self.points[tab[i]].y - self.points[tab[i+1]].y)**2)
         return somme
 
-
     def pvc_prim(self, sommet): #prim
         """
         Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
@@ -177,3 +175,26 @@ class Graphes:
         :param sommet: Un sommet s du graphe
         :return: Le cycle hamiltonien du graphe
         """
+
+        tab_visited = []
+        matrice_lien = np.full((self.nb_point, self.nb_point), 0)
+        r = sommet
+        s_actuel = 0
+        tab_visited.append(r)
+        while len(tab_visited) < self.nb_point:
+            change = 0
+            for x in self.plus_proche_sommet(r):
+                if not tab_visited.__contains__(x):
+                    tab_visited.append(x)
+                    matrice_lien[r][x] = 1
+                    r = x
+                    print(r)
+                    s_actuel = len(tab_visited)-1
+                    change = 1
+                    break
+            if change == 0:
+                if s_actuel != 0:
+                    s_actuel -= 1
+                r = tab_visited[s_actuel]
+
+        return matrice_lien

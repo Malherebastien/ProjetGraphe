@@ -29,4 +29,4 @@ def remplir_matrice():
 
 fenetre = Fenetre(points)
 graphe = Graphes(nb_point, points, remplir_matrice())
-fenetre.afficher_totale(graphe.glouton(0))
+fenetre.afficher_totale(graphe.pvc_prim(0))

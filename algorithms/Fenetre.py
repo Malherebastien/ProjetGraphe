@@ -14,8 +14,8 @@ class Fenetre:
         self.tab_point = tab_point
         self.color_arc = "red"
 
-    def afficher_totale(self, tab_liaisons):
-        self.relier_arc(tab_liaisons)
+    def afficher_totale(self, mat):
+        self.relier_arc_matrice(mat)
         #bouton = Button(self.fenetre, text="Appliquer opti", command=self.relier_arc_opti(tab_liaisons, Graphes.optimise_glou(tab_liaisons)))
         #bouton.pack()
         self.canvas.pack()
@@ -33,6 +33,16 @@ class Fenetre:
                                         self.tab_point[tab_liaisons[i]].y * 300,
                                         self.tab_point[tab_liaisons[i - 1]].x * 300,
                                         self.tab_point[tab_liaisons[i - 1]].y * 300, fill="black")
+        self.placer_points()
+
+    def relier_arc_matrice(self, mat):
+        for i in range(0, len(mat)):
+            for j in range(0, len(mat)):
+                if mat[i][j] == 1:
+                    self.canvas.create_line(self.tab_point[i].x * 300,
+                                            self.tab_point[i].y * 300,
+                                            self.tab_point[j].x * 300,
+                                            self.tab_point[j].y * 300, fill="black")
         self.placer_points()
 
     def relier_arc_opti(self, tab_liaisons, tab_opti):
