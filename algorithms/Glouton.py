@@ -13,7 +13,7 @@ class Glouton:
         self.poids_total = 0
         self.sortie_glou = self.glouton(sommet_depart)
 
-    def glouton(self, sommet):  # glouton
+    def glouton(self, sommet):
         """
         L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
         systématiquement le sommet le plus proche que l’on n’a pas encore visité
@@ -34,5 +34,6 @@ class Glouton:
                                    self.points[self.sortie_glou[i+1]].x)**2 +
                                   (self.points[self.sortie_glou[i]].y -
                                    self.points[self.sortie_glou[i+1]].y)**2)
-        print(somme)
+
+        self.poids_total = self.graphe.long_chemin(self.sortie_glou)
         return self.sortie_glou

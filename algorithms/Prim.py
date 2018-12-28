@@ -44,3 +44,16 @@ class Prim:
                 r = tab_visited[s_actuel]
 
         return matrice_lien
+
+    def avoir_poid(self):
+        """
+        Retourne le poid total de l'ACPM
+        :return: le poid total de l'ACPM
+        """
+        somme = 0
+        for i in range(0, self.nb_point):
+            for j in range(0, self.nb_point):
+                if self.matrice_lien[i][j] == 1:
+                    somme += np.math.sqrt((self.points[i].x - self.points[j].x) ** 2 +
+                                          (self.points[i].y - self.points[j].y) ** 2)
+        return somme
