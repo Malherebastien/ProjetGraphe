@@ -35,8 +35,6 @@ class Fenetre:
 
         sommet_depart = np.random.randint(0, graphe.nb_point)
 
-        stats = Stats(100, 10)
-
         graphe_glouton = Glouton(graphe, sommet_depart)
         self.affiche_glouton(graphe_glouton, canvas1)
         canvas1.grid(column=1, row=0)
@@ -49,12 +47,28 @@ class Fenetre:
         self.affiche_prim(prim, canvas3)
         canvas3.grid(column=3, row=0)
 
+
         self.create_stat(graphe, stat1)
         stat1.grid(column=0, row=1)
         self.fenetre.mainloop()
 
     def create_stat(self, graphe: Graphes, to_fill):
         to_fill.create_text(100, 100, text=graphe.poids_total)
+        return to_fill
+
+    def create_global_stats(self, to_fill):
+        stat1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        stat1.grid(column=0, row=1)
+        stat1.create_text(100, 100, text="Longueur moyenne de glouton :")
+        stat1.create_text(225, 100, text=self.stat.moy_lg)
+        stat1.create_text(100, 120, text="Longueur moyenne de opti-glouton :")
+        stat1.create_text(225, 120, text=self.stat.moy_lo)
+        stat1.create_text(100, 140, text="Longueur moyenne de prim :")
+        stat1.create_text(225, 140, text=self.stat.moy_lp)
+        stat1.create_text(100, 160, text="Pourcentage d'amélioration glouton/opti-glou :")
+        stat1.create_text(225, 160, text=self.stat.amelio_glou_opti)
+        stat1.create_text(100, 180, text="Pourcentage d'amélioration opti-glou/prim :")
+        stat1.create_text(225, 180, text=self.stat.amelio_opti_prim)
         return to_fill
 
     def affiche_glouton(self, graphe: Glouton, to_fill):
@@ -116,7 +130,7 @@ class Fenetre:
         nb_points = IntVar()
         e1 = Entry(to_fill)
         e2 = Entry(to_fill)
-        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(nb_iterations, nb_points))
+        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(nb_iterations, nb_points, to_fill))
 
         to_fill.create_text(100, 100, text="Nombre d'iterations :")
         to_fill.create_window(225, 100, window=e1)
@@ -126,5 +140,6 @@ class Fenetre:
         to_fill.create_window(160, 300, window=button1)
         return to_fill
 
-    def lancer_graphes(self, nb_iterations, nb_points):
+    def lancer_graphes(self, nb_iterations, nb_points, to_fill):
         self.stat = Stats(nb_iterations, nb_points)
+        self.create_global_stats(to_fill)

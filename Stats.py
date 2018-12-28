@@ -27,7 +27,7 @@ class Stats:
             while x < self.nb_pts:
                 points.append(Point(x, np.random.randint(0, 1000) / 1000, np.random.randint(0, 1000) / 1000))
                 x += 1
-            graphe = Graphes(self.nb_pts, points, remplir_matrice(points))
+            graphe = Graphes(self.nb_pts, points, self.remplir_matrice(points))
 
             sommet_depart = np.random.randint(0, graphe.self.nb_pts)
             graphe_glouton = Glouton(graphe, sommet_depart)

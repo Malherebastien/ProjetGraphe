@@ -5,7 +5,7 @@ from algorithms.Point import *
 
 
 points = []
-nb_point = 20
+nb_point = 10
 
 x = 0
 while x < nb_point:
