@@ -1,4 +1,6 @@
 from tkinter import *
+
+from algorithms.Glouton import *
 from algorithms.Graphes import *
 
 
@@ -14,12 +16,14 @@ class Fenetre:
         self.tab_point = tab_point
         self.color_arc = "red"
 
-    def afficher_tout(self, graphe: Graphes, tab_liaisons):
+    def afficher_tout(self, graphe: Graphes):
         canvas1 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
         canvas2 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
         stat1 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
-        self.affiche_glouton(tab_liaisons, canvas1)
-        self.affiche_opti(tab_liaisons,  canvas2)
+
+        graphe_glouton = Glouton(graphe)
+        self.affiche_glouton(graphe_glouton.glouton(0), canvas1)
+        # self.affiche_opti(tab_liaisons, canvas2)
         self.create_stat(graphe, stat1)
         # bouton = Button(self.fenetre, text="Appliquer opti", command=self.relier_arc_opti(tab_liaisons,
         # Graphes.optimise_glou(tab_liaisons)))

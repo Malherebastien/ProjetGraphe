@@ -28,5 +28,5 @@ def remplir_matrice():
 
 
 fenetre = Fenetre(points)
-graphe = Glouton(nb_point, points, remplir_matrice())
-fenetre.afficher_tout(graphe, graphe.glouton(0))
+graphe = Graphes(nb_point, points, remplir_matrice())
+fenetre.afficher_tout(graphe)
