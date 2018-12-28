@@ -1,5 +1,4 @@
 from tkinter import *
-from matplotlib import *
 from algorithms.Graphes import *
 
 
@@ -17,13 +16,13 @@ class Fenetre:
 
     # def init_ui(self):
 
-    def afficher_totale(self, graphe : Graphes, tab_liaisons):
+    def afficher_tout(self, graphe: Graphes, tab_liaisons):
         canvas1 = Canvas(self.fenetre, height=310, width=310)
         canvas2 = Canvas(self.fenetre, height=310, width=310)
         stat1 = Canvas(self.fenetre, height=310, width=310)
         self.relier_arc(tab_liaisons, canvas1)
         self.relier_arc(tab_liaisons, canvas2)
-        self.createStat(graphe, stat1)
+        self.create_stat(graphe, stat1)
         # bouton = Button(self.fenetre, text="Appliquer opti", command=self.relier_arc_opti(tab_liaisons,
         # Graphes.optimise_glou(tab_liaisons)))
         # bouton.pack()
@@ -32,7 +31,7 @@ class Fenetre:
         stat1.grid(column=0, row=1)
         self.fenetre.mainloop()
 
-    def createStat(self, graphe : Graphes, to_fill):
+    def create_stat(self, graphe: Graphes, to_fill):
         to_fill.create_text(100, 100, text=graphe.poids_total)
         return to_fill
 

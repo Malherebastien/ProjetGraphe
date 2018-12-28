@@ -1,4 +1,5 @@
 from Fenetre import*
+from algorithms.Glouton import *
 import numpy as np
 
 points = []
@@ -27,5 +28,5 @@ def remplir_matrice():
 
 
 fenetre = Fenetre(points)
-graphe = Graphes(nb_point, points, remplir_matrice())
-fenetre.afficher_totale(graphe, graphe.glouton(0))
+graphe = Glouton(nb_point, points, remplir_matrice())
+fenetre.afficher_tout(graphe, graphe.glouton(0))

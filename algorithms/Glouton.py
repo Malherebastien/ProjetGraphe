@@ -4,7 +4,7 @@ from algorithms.Graphes import Graphes
 
 
 class Glouton(Graphes):
-    def glouton(self, sommet): #glouton
+    def glouton(self, sommet):  # glouton
         """
         L’algorithme glouton consiste, en partant d’un sommets tiré au hasard, à rejoindre
         systématiquement le sommet le plus proche que l’on n’a pas encore

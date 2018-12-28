@@ -1,7 +1,9 @@
+import numpy as np
+
 from algorithms.Graphes import Graphes
 
 
-class Primm(Graphes):
+class Prim(Graphes):
     def pvc_prim(self, sommet):  # prim
         """
         Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
