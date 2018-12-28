@@ -71,16 +71,20 @@ class Fenetre:
         return to_fill
 
     def create_global_stats(self, to_fill):
-        to_fill.create_text(150, 100, text="Longueur moyenne de glouton :")
-        to_fill.create_text(250, 115, text=self.stat.moy_lg)
-        to_fill.create_text(150, 130, text="Longueur moyenne de opti-glouton :")
-        to_fill.create_text(250, 145, text=self.stat.moy_lo)
-        to_fill.create_text(150, 160, text="Longueur moyenne de prim :")
-        to_fill.create_text(250, 175, text=self.stat.moy_lp)
-        to_fill.create_text(150, 190, text="Pourcentage d'amélioration glouton/opti-glou :")
-        to_fill.create_text(250, 205, text=self.stat.amelio_glou_opti)
-        to_fill.create_text(150, 220, text="Pourcentage d'amélioration opti-glou/prim :")
-        to_fill.create_text(250, 235, text=self.stat.amelio_opti_prim)
+        to_fill.destroy()
+        self.stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        self.stats_global.grid(column=2, row=1)
+        self.stats_global.create_text(150, 100, text="Longueur moyenne de glouton :")
+        self.stats_global.create_text(250, 115, text=self.stat.moy_lg)
+        self.stats_global.create_text(150, 130, text="Longueur moyenne de opti-glouton :")
+        self.stats_global.create_text(250, 145, text=self.stat.moy_lo)
+        self.stats_global.create_text(150, 160, text="Longueur moyenne de prim :")
+        self.stats_global.create_text(250, 175, text=self.stat.moy_lp)
+        self.stats_global.create_text(150, 190, text="Pourcentage d'amélioration glouton/opti-glou :")
+        self.stats_global.create_text(250, 205, text=self.stat.amelio_glou_opti)
+        self.stats_global.create_text(150, 220, text="Pourcentage d'amélioration opti-glou/prim :")
+        self.stats_global.create_text(250, 235, text=self.stat.amelio_opti_prim)
+
         return to_fill
 
     def affiche_glouton(self, graphe: Glouton, to_fill):
