@@ -1,6 +1,7 @@
 import numpy as np
 
 from algorithms.Graphes import Graphes
+import numpy as np
 
 
 class Prim(Graphes):

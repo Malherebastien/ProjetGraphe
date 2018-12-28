@@ -9,7 +9,6 @@ class OptiGlouton(Graphes):
         Prends en entrée le circuit L et décroise, si le décroisement est avantageux, tous
         les couples d’indices envisageables (a, b) jusqu’`a ce qu’il n’y ait plus aucun
         couple d’arêtes croisées.
-        :param circuit: La liste correspondant au circuit hamiltonien obtenu à partir du sommet (obtenu via glouton())
         :return: void
         """
 
@@ -27,17 +26,17 @@ class OptiGlouton(Graphes):
                             print("application", i, " et ", j)
                             self.chemins = self.echange_sommet(i, j)
                             changement += 1
-        # print(self.chemins)
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[self.chemins[i]].x - self.points[self.chemins[i+1]].x)**2 +
                                   (self.points[self.chemins[i]].y - self.points[self.chemins[i+1]].y)**2)
         print(somme)
         return self.chemins
 
-    def est_croise(self, i, j): #opti_glou
+    def est_croise(self, i, j):
         """
         Prend en entrée l'index d'un sommet et renvoit regarde si les arcs formés avec ses dus successeurs sont croisée
-        :param index: index du sommet
+        :param i: index du sommet
+        :param i: index du sommet
         :return: 1 si les arcs sont croisés, 0 sinon
         """
         abx = self.points[self.chemins[i+1]].x - self.points[self.chemins[i]].x
@@ -70,8 +69,8 @@ class OptiGlouton(Graphes):
     def echange_sommet(self, index1, index2): #opti_glou
         """
         Prends en entrée le tableau de sommets et un index, la valeur de l'index donné est inversé avec le suivant
-        :param sommets: Tableau des sommets triés par glouton
-        :param index: index de la valeur à échanger avec la suivante
+        :param index1: index du premier sommet du premier arc
+        :param index2: index du premier sommet du second arc
         :return: liste des sommets réarangée
         """
         tab = []
@@ -92,7 +91,7 @@ class OptiGlouton(Graphes):
             temp = tab[i]
             tab[i] = tab[k]
             tab[k] = temp
-            i+=1
-            k-=1
+            i += 1
+            k -= 1
 
         return tab

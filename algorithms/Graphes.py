@@ -19,7 +19,7 @@ class Graphes:
         self.poids_total = 0
         self.sortie_glou = []
 
-    def long_chemin(self, tab): # classe mère
+    def long_chemin(self, tab):
         """
         Donne la longueur totale du chemin
         :param tab: tableau de l'ordre des points
