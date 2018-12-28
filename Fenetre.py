@@ -1,5 +1,6 @@
 from tkinter import *
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
 
 from Stats import Stats
 
@@ -63,11 +64,19 @@ class Fenetre:
         fig = plt.figure()
 
         x = [1, 2, 3]
-        height = [self.stat.moy_lg, self.stat.moy_lo, self.stat.moy_lp]
+        height = [3, 5, 3]
+        # height = [self.stat.moy_lg, self.stat.moy_lo, self.stat.moy_lp]
         width = 1.0
 
+        image_name = 'Diagram.png'
         plt.bar(x, height, width, color='b')
-        to_fill = FigureCanvasAgg(fig)
+        plt.savefig(image_name)
+
+        im = Image.open(image_name)
+
+        photo = ImageTk.PhotoImage(im)
+
+        to_fill.create_image(10, 10, image=photo, anchor=NW)
         return to_fill
 
     def create_global_stats(self, to_fill):
