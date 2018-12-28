@@ -126,11 +126,11 @@ class Fenetre:
             to_fill.create_text(point.x * 300 + 10, point.y * 300 + 10, text=point.point_id, fill="white")
 
     def affiche_settings(self, to_fill):
-        nb_iterations = IntVar()
-        nb_points = IntVar()
         e1 = Entry(to_fill)
+        e1.insert(0, 100)
         e2 = Entry(to_fill)
-        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(nb_iterations, nb_points, to_fill))
+        e2.insert(0, 20)
+        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(e1.get(), e2.get(), to_fill))
 
         to_fill.create_text(100, 100, text="Nombre d'iterations :")
         to_fill.create_window(225, 100, window=e1)
