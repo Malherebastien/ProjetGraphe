@@ -1,10 +1,17 @@
-import numpy as np
-
 from algorithms.Graphes import Graphes
 import numpy as np
 
 
-class Prim(Graphes):
+class Prim:
+
+    def __init__(self, graphe: Graphes):
+        self.nb_point = graphe.nb_point
+        self.points = graphe.points
+        self.matrice_dimension = graphe.matrice_dimension
+        self.poids_total = 0
+        self.sortie_glou = graphe.sortie_glou
+        self.sortie_opti = graphe.sortie_opti
+
     def pvc_prim(self, sommet):
         """
         Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
@@ -20,7 +27,7 @@ class Prim(Graphes):
         tab_visited.append(r)
         while len(tab_visited) < self.nb_point:
             change = 0
-            for x in self.plus_proche_sommet(r):
+            for x in Graphes.plus_proche_sommet(r):
                 if not tab_visited.__contains__(x):
                     tab_visited.append(x)
                     matrice_lien[r][x] = 1

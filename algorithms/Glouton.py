@@ -23,7 +23,7 @@ class Glouton:
         prochain_sommet = sommet
         somme = 0
         for i in range(0, self.nb_point):
-            for x in self.plus_proche_sommet(prochain_sommet):
+            for x in Graphes.plus_proche_sommet(prochain_sommet):
                 if not self.sortie_glou.__contains__(x):
                     self.sortie_glou.append(x)
                     prochain_sommet = x

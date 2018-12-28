@@ -2,7 +2,16 @@ import numpy as np
 from algorithms.Graphes import Graphes
 
 
-class OptiGlouton(Graphes):
+class OptiGlouton:
+
+    def __init__(self, graphe: Graphes):
+        self.nb_point = graphe.nb_point
+        self.points = graphe.points
+        self.matrice_dimension = graphe.matrice_dimension
+        self.poids_total = 0
+        self.sortie_glou = graphe.sortie_glou
+        self.sortie_opti = graphe.sortie_opti
+
     def optimise_glou(self):
         """
         Prends en entrée le circuit L et décroise, si le décroisement est avantageux, tous
@@ -58,8 +67,8 @@ class OptiGlouton(Graphes):
         det4 = cdx * cby - cdy * cbx
 
         if det1 * det2 < 0 and det3 * det4 < 0:
-            l1 = self.long_chemin(self.sortie_opti)
-            l2 = self.long_chemin(self.echange_sommet(i, j))
+            l1 = Graphes.long_chemin(self.sortie_opti)
+            l2 = Graphes.long_chemin(self.echange_sommet(i, j))
             print("l1 = ", l1, " l2 = ", l2)
             if l1 > l2:
                 return 1
