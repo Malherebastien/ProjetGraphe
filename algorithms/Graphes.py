@@ -1,6 +1,4 @@
 import numpy as np
-from algorithms.Point import *
-
 
 class Graphes:
     """La classe principale :"""

@@ -1,7 +1,8 @@
-from Fenetre import *
+from Fenetre import Fenetre
 from algorithms.Graphes import *
-from Stats import *
 import numpy as np
+from algorithms.Point import *
+
 
 points = []
 nb_point = 20
@@ -30,5 +31,4 @@ def remplir_matrice():
 
 fenetre = Fenetre(points)
 graphe = Graphes(nb_point, points, remplir_matrice())
-stats = Stats(100, 10)
 fenetre.afficher_tout(graphe)

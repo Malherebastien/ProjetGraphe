@@ -1,9 +1,9 @@
 from tkinter import *
 
-from Stats import *
+from Stats import Stats
 
-from algorithms.Prim import *
-from algorithms.Glouton import *
+from algorithms.Prim import Prim
+from algorithms.Glouton import Glouton
 from algorithms.Graphes import *
 from algorithms.OptiGlouton import OptiGlouton
 
@@ -33,6 +33,8 @@ class Fenetre:
         settings.grid(column=0, row=0)
 
         sommet_depart = np.random.randint(0, graphe.nb_point)
+
+        stats = Stats(100, 10)
 
         graphe_glouton = Glouton(graphe, sommet_depart)
         self.affiche_glouton(graphe_glouton, canvas1)

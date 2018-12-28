@@ -2,7 +2,7 @@ from algorithms.Graphes import *
 from algorithms.Glouton import Glouton
 from algorithms.OptiGlouton import OptiGlouton
 from algorithms.Prim import Prim
-from Laucher import remplir_matrice
+from algorithms.Point import *
 
 
 class Stats:
@@ -27,9 +27,9 @@ class Stats:
             while x < self.nb_pts:
                 points.append(Point(x, np.random.randint(0, 1000) / 1000, np.random.randint(0, 1000) / 1000))
                 x += 1
-            graphe = Graphes(self.nb_pts, points, remplir_matrice())
+            graphe = Graphes(self.nb_pts, points, remplir_matrice(points))
 
-            sommet_depart = np.random.randint(0, graphe.nb_point)
+            sommet_depart = np.random.randint(0, graphe.self.nb_pts)
             graphe_glouton = Glouton(graphe, sommet_depart)
             graphe_opti = OptiGlouton(graphe_glouton)
             graphe_prim = Prim(graphe, sommet_depart)
@@ -48,3 +48,18 @@ class Stats:
         self.moy_lp = sum(lp) / len(lp)
         self.amelio_glou_opti = sum(res_glou_opti) / len(res_glou_opti)
         self.amelio_opti_prim = sum(res_opti_prim) / len(res_opti_prim)
+
+    def remplir_matrice(self, points):
+        matrice = np.full((self.nb_pts, self.nb_pts), np.inf)
+        i = 0
+        while i < self.nb_pts:
+            j = 0 + i
+            while j < self.nb_pts:
+                if i == j:
+                    matrice[i][j] = np.inf
+                else:
+                    matrice[i][j] = np.math.sqrt((points[i].x - points[j].x) ** 2 + (points[i].y - points[j].y) ** 2)
+                    matrice[j][i] = np.math.sqrt((points[i].x - points[j].x) ** 2 + (points[i].y - points[j].y) ** 2)
+                j = j + 1
+            i = i + 1
+        return matrice

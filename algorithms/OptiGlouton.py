@@ -1,6 +1,6 @@
 import numpy as np
 from algorithms.Graphes import Graphes
-from algorithms.Glouton import *
+from algorithms.Glouton import Glouton
 
 
 class OptiGlouton:
