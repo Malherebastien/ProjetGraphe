@@ -10,9 +10,9 @@ class OptiGlouton:
         self.nb_point = graphe.nb_point
         self.points = graphe.points
         self.matrice_dimension = graphe.matrice_dimension
-        self.poids_total = 0
         self.sortie_glou = graphe.sortie_glou
         self.sortie_opti = self.optimise_glou()
+        self.poids_total = self.graphe.long_chemin(self.sortie_opti)
 
     def optimise_glou(self):
         """
@@ -38,7 +38,6 @@ class OptiGlouton:
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[sortie_opti[i]].x - self.points[sortie_opti[i+1]].x)**2 +
                                   (self.points[sortie_opti[i]].y - self.points[sortie_opti[i+1]].y)**2)
-        self.poids_total = self.graphe.long_chemin(self.sortie_glou)
         return sortie_opti
 
     def est_croise(self, i, j, sortie_opti):

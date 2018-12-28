@@ -34,7 +34,6 @@ class Stats:
             graphe_glouton = Glouton(graphe, sommet_depart)
             graphe_opti = OptiGlouton(graphe_glouton)
             graphe_prim = Prim(graphe, sommet_depart)
-            print(graphe_glouton.poids_total == graphe_opti.poids_total)
 
             res_glou_opti.append(((graphe_glouton.poids_total - graphe_opti.poids_total)
                                  / graphe_glouton.poids_total) * 100)
@@ -45,7 +44,6 @@ class Stats:
             lo.append(graphe_opti.poids_total)
             lp.append(graphe_prim.poids_total)
 
-        print(lg == lo)
 
         self.moy_lg = sum(lg) / len(lg)
         self.moy_lo = sum(lo) / len(lo)
