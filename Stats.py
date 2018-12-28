@@ -14,7 +14,8 @@ class Stats:
         self.moy_lg = 0
         self.moy_lo = 0
         self.moy_lp = 0
-        self.tests_en_chaine()
+        if nb_test > 0 and nb_pts >0:
+            self.tests_en_chaine()
 
     def tests_en_chaine(self):
         res_glou_opti = []
