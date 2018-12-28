@@ -14,7 +14,8 @@ class Stats:
         self.moy_lg = 0
         self.moy_lo = 0
         self.moy_lp = 0
-        self.tests_en_chaine()
+        if nb_pts > 0 and nb_test > 0:
+            self.tests_en_chaine()
 
     def tests_en_chaine(self):
         res_glou_opti = []
@@ -43,7 +44,6 @@ class Stats:
             lg.append(graphe_glouton.poids_total)
             lo.append(graphe_opti.poids_total)
             lp.append(graphe_prim.poids_total)
-
 
         self.moy_lg = sum(lg) / len(lg)
         self.moy_lo = sum(lo) / len(lo)

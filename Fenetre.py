@@ -1,4 +1,5 @@
 from tkinter import *
+import matplotlib.pyplot as plt
 
 from Stats import Stats
 
@@ -6,6 +7,7 @@ from algorithms.Prim import Prim
 from algorithms.Glouton import Glouton
 from algorithms.Graphes import *
 from algorithms.OptiGlouton import OptiGlouton
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 
 class Fenetre:
@@ -18,57 +20,69 @@ class Fenetre:
         self.fenetre = Tk()
         self.tab_point = tab_point
         self.color_arc = "red"
-        self.stat = 0
+        self.stat = Stats(0, 0)
 
     def afficher_tout(self, graphe: Graphes):
-        settings = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
-        stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas2 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas3 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
-        stat1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
-        stat2 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
-        stat3 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        settings = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        diagram = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
 
         self.affiche_settings(settings)
-        settings.grid(column=0, row=0)
+        settings.grid(column=0, row=1)
 
         sommet_depart = np.random.randint(0, graphe.nb_point)
 
         graphe_glouton = Glouton(graphe, sommet_depart)
         self.affiche_glouton(graphe_glouton, canvas1)
-        canvas1.grid(column=1, row=0)
+        canvas1.grid(column=0, row=0)
 
         graphe_opti = OptiGlouton(graphe_glouton)
         self.affiche_opti(graphe_opti, canvas2)
-        canvas2.grid(column=2, row=0)
+        canvas2.grid(column=1, row=0)
 
         prim = Prim(graphe, sommet_depart)
         self.affiche_prim(prim, canvas3)
-        canvas3.grid(column=3, row=0)
+        canvas3.grid(column=2, row=0)
 
+        self.create_diagram(diagram)
+        diagram.grid(column=1, row=1)
 
-        self.create_stat(graphe, stat1)
-        stat1.grid(column=0, row=1)
+        self.create_global_stats(stats_global)
+        stats_global.grid(column=2, row=1)
+
         self.fenetre.mainloop()
 
-    def create_stat(self, graphe: Graphes, to_fill):
-        to_fill.create_text(100, 100, text=graphe.poids_total)
+    def lancer_graphes(self, nb_iterations, nb_points, to_fill):
+        self.stat = Stats(nb_iterations, nb_points)
+        self.create_global_stats(to_fill)
+
+    def create_diagram(self, to_fill):
+        fig = plt.figure()
+
+        x = [1, 2, 3]
+        height = [self.stat.moy_lg, self.stat.moy_lo, self.stat.moy_lp]
+        width = 1.0
+
+        plt.bar(x, height, width, color='b')
+        to_fill = FigureCanvasAgg(fig)
         return to_fill
 
     def create_global_stats(self, to_fill):
         stat1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         stat1.grid(column=0, row=1)
-        stat1.create_text(100, 100, text="Longueur moyenne de glouton :")
-        stat1.create_text(250, 100, text=self.stat.moy_lg)
-        stat1.create_text(100, 120, text="Longueur moyenne de opti-glouton :")
-        stat1.create_text(250, 120, text=self.stat.moy_lo)
-        stat1.create_text(100, 140, text="Longueur moyenne de prim :")
-        stat1.create_text(250, 140, text=self.stat.moy_lp)
-        stat1.create_text(100, 160, text="Pourcentage d'amélioration glouton/opti-glou :")
-        stat1.create_text(250, 160, text=self.stat.amelio_glou_opti)
-        stat1.create_text(100, 180, text="Pourcentage d'amélioration opti-glou/prim :")
-        stat1.create_text(250, 180, text=self.stat.amelio_opti_prim)
+        stat1.create_text(150, 100, text="Longueur moyenne de glouton :")
+        stat1.create_text(250, 115, text=self.stat.moy_lg)
+        stat1.create_text(150, 130, text="Longueur moyenne de opti-glouton :")
+        stat1.create_text(250, 145, text=self.stat.moy_lo)
+        stat1.create_text(150, 160, text="Longueur moyenne de prim :")
+        stat1.create_text(250, 175, text=self.stat.moy_lp)
+        stat1.create_text(150, 190, text="Pourcentage d'amélioration glouton/opti-glou :")
+        stat1.create_text(250, 205, text=self.stat.amelio_glou_opti)
+        stat1.create_text(150, 220, text="Pourcentage d'amélioration opti-glou/prim :")
+        stat1.create_text(250, 235, text=self.stat.amelio_opti_prim)
         return to_fill
 
     def affiche_glouton(self, graphe: Glouton, to_fill):
@@ -140,6 +154,4 @@ class Fenetre:
         to_fill.create_window(160, 300, window=button1)
         return to_fill
 
-    def lancer_graphes(self, nb_iterations, nb_points, to_fill):
-        self.stat = Stats(nb_iterations, nb_points)
-        self.create_global_stats(to_fill)
+
