@@ -5,7 +5,7 @@ import numpy as np
 
 
 class Prim(Graphes):
-    def pvc_prim(self, sommet):  # prim
+    def pvc_prim(self, sommet):
         """
         Il consiste à choisir un sommet au hasard parmi les N sommets et à construire
         un arbre couvrant de poids minimun, en utilisant l’algorithme de Prim
