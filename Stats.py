@@ -14,8 +14,7 @@ class Stats:
         self.moy_lg = 0
         self.moy_lo = 0
         self.moy_lp = 0
-        if nb_pts > 0 and nb_test > 0:
-            self.tests_en_chaine()
+        self.tests_en_chaine()
 
     def tests_en_chaine(self):
         res_glou_opti = []
@@ -45,11 +44,11 @@ class Stats:
             lo.append(graphe_opti.poids_total)
             lp.append(graphe_prim.poids_total)
 
-        self.moy_lg = sum(lg) / len(lg)
-        self.moy_lo = sum(lo) / len(lo)
-        self.moy_lp = sum(lp) / len(lp)
-        self.amelio_glou_opti = sum(res_glou_opti) / len(res_glou_opti)
-        self.amelio_opti_prim = sum(res_opti_prim) / len(res_opti_prim)
+        self.moy_lg = round(sum(lg) / len(lg), 3)
+        self.moy_lo = round(sum(lo) / len(lo), 3)
+        self.moy_lp = round(sum(lp) / len(lp), 3)
+        self.amelio_glou_opti = round(sum(res_glou_opti) / len(res_glou_opti), 3)
+        self.amelio_opti_prim = round(sum(res_opti_prim) / len(res_opti_prim), 3)
 
     def remplir_matrice(self, points):
         matrice = np.full((self.nb_pts, self.nb_pts), np.inf)
