@@ -14,14 +14,12 @@ class Fenetre:
         self.tab_point = tab_point
         self.color_arc = "red"
 
-    # def init_ui(self):
-
     def afficher_tout(self, graphe: Graphes, tab_liaisons):
-        canvas1 = Canvas(self.fenetre, height=310, width=310)
-        canvas2 = Canvas(self.fenetre, height=310, width=310)
-        stat1 = Canvas(self.fenetre, height=310, width=310)
-        self.relier_arc(tab_liaisons, canvas1)
-        self.relier_arc(tab_liaisons, canvas2)
+        canvas1 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
+        canvas2 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
+        stat1 = Canvas(self.fenetre, height=310, width=310, borderwidth=10, relief=GROOVE)
+        self.affiche_glouton(tab_liaisons, canvas1)
+        self.affiche_opti(tab_liaisons,  canvas2)
         self.create_stat(graphe, stat1)
         # bouton = Button(self.fenetre, text="Appliquer opti", command=self.relier_arc_opti(tab_liaisons,
         # Graphes.optimise_glou(tab_liaisons)))
@@ -35,7 +33,7 @@ class Fenetre:
         to_fill.create_text(100, 100, text=graphe.poids_total)
         return to_fill
 
-    def relier_arc(self, tab_liaisons, to_fill):
+    def affiche_glouton(self, tab_liaisons, to_fill):
         for i in range(1, len(tab_liaisons)):
             if i == 1:
                 to_fill.create_line(self.tab_point[tab_liaisons[i]].x * 300,
@@ -50,10 +48,10 @@ class Fenetre:
         self.placer_points(to_fill)
         return to_fill
 
-    '''def relier_arc_opti(self, tab_liaisons, tab_opti):
+    def affiche_opti(self, tab_liaisons, tab_opti, to_fill):
         for i in range(1, len(tab_opti)):
             if i == 1:
-                self.canvas.create_line(self.tab_point[tab_opti[i]].x * 300,
+                to_fill.create_line(self.tab_point[tab_opti[i]].x * 300,
                                         self.tab_point[tab_opti[i]].y * 300,
                                         self.tab_point[tab_opti[i - 1]].x * 300,
                                         self.tab_point[tab_opti[i - 1]].y * 300, fill="red")
@@ -62,14 +60,12 @@ class Fenetre:
                     self.color_arc = "blue"
                 else:
                     self.color_arc = "black"
-                self.canvas.create_line(self.tab_point[tab_opti[i]].x * 300,
+                to_fill.create_line(self.tab_point[tab_opti[i]].x * 300,
                                         self.tab_point[tab_opti[i]].y * 300,
                                         self.tab_point[tab_opti[i - 1]].x * 300,
                                         self.tab_point[tab_opti[i - 1]].y * 300, fill=self.color_arc)
-        self.placer_points()
-        self.canvas.pack()
-        self.fenetre.mainloop()
-    '''
+        self.placer_points(to_fill)
+        return to_fill
 
     def placer_points(self, to_fill):
         for point in self.tab_point:

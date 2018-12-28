@@ -15,9 +15,9 @@ class Graphes:
         self.nb_point = nb_point
         self.points = points
         self.matrice_dimension = matrice_dimension
-        self.chemins = []
         self.poids_total = 0
         self.sortie_glou = []
+        self.sortie_opti = []
 
     def long_chemin(self, tab):
         """
