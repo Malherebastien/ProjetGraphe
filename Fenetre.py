@@ -18,6 +18,7 @@ class Fenetre:
         self.fenetre = Tk()
         self.tab_point = tab_point
         self.color_arc = "red"
+        self.stat = 0
 
     def afficher_tout(self, graphe: Graphes):
         settings = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
@@ -113,10 +114,17 @@ class Fenetre:
     def affiche_settings(self, to_fill):
         nb_iterations = IntVar()
         nb_points = IntVar()
-        label1 = Label(to_fill, text="Nombre d'itérations", textvariable=nb_iterations)
-        label2 = Label(to_fill, text="Nombre de points", textvariable=nb_points)
-        button1 = Button(to_fill, text="Lancer", command=self.lancer_graphes(nb_iterations, nb_points))
+        e1 = Entry(to_fill)
+        e2 = Entry(to_fill)
+        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(nb_iterations, nb_points))
+
+        to_fill.create_text(100, 100, text="Nombre d'iterations :")
+        to_fill.create_window(225, 100, window=e1)
+        to_fill.create_text(100, 200, text="Nombre de points   :")
+        to_fill.create_window(225, 200, window=e2)
+
+        to_fill.create_window(160, 300, window=button1)
         return to_fill
 
     def lancer_graphes(self, nb_iterations, nb_points):
-            stat = Stats(nb_iterations, nb_points)
+        self.stat = Stats(nb_iterations, nb_points)
