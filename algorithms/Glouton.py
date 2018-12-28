@@ -5,12 +5,13 @@ from algorithms.Graphes import Graphes
 
 class Glouton:
 
-    def __init__(self, graphe: Graphes):
+    def __init__(self, graphe: Graphes, sommet_depart):
+        self.graphe = graphe
         self.nb_point = graphe.nb_point
         self.points = graphe.points
         self.matrice_dimension = graphe.matrice_dimension
         self.poids_total = 0
-        self.sortie_glou = []
+        self.sortie_glou = self.glouton(sommet_depart)
 
     def glouton(self, sommet):  # glouton
         """
@@ -23,7 +24,7 @@ class Glouton:
         prochain_sommet = sommet
         somme = 0
         for i in range(0, self.nb_point):
-            for x in Graphes.plus_proche_sommet(prochain_sommet):
+            for x in self.graphe.plus_proche_sommet(prochain_sommet):
                 if not self.sortie_glou.__contains__(x):
                     self.sortie_glou.append(x)
                     prochain_sommet = x
