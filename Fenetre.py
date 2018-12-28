@@ -27,7 +27,7 @@ class Fenetre:
         canvas2 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas3 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         settings = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
-        stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        self.stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         diagram = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
 
         self.affiche_settings(settings)
@@ -50,8 +50,8 @@ class Fenetre:
         self.create_diagram(diagram)
         diagram.grid(column=1, row=1)
 
-        self.create_global_stats(stats_global)
-        stats_global.grid(column=2, row=1)
+        self.create_global_stats(self.stats_global)
+        self.stats_global.grid(column=2, row=1)
 
         self.fenetre.mainloop()
 
@@ -73,6 +73,7 @@ class Fenetre:
     def create_global_stats(self, to_fill):
         to_fill.create_text(150, 100, text="Longueur moyenne de glouton :")
         to_fill.create_text(250, 115, text=self.stat.moy_lg)
+        to_fill.create_text(150, 130, text="Longueur moyenne de opti-glouton :")
         to_fill.create_text(250, 145, text=self.stat.moy_lo)
         to_fill.create_text(150, 160, text="Longueur moyenne de prim :")
         to_fill.create_text(250, 175, text=self.stat.moy_lp)
@@ -141,7 +142,7 @@ class Fenetre:
         e1.insert(0, 100)
         e2 = Entry(to_fill)
         e2.insert(0, 20)
-        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(int(e1.get()), int(e2.get()), to_fill))
+        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(int(e1.get()), int(e2.get()), self.stats_global))
 
         to_fill.create_text(100, 100, text="Nombre d'iterations :")
         to_fill.create_window(225, 100, window=e1)
