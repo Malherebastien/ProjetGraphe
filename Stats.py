@@ -14,6 +14,7 @@ class Stats:
         self.moy_lg = 0
         self.moy_lo = 0
         self.moy_lp = 0
+        self.tests_en_chaine()
 
     def tests_en_chaine(self):
         res_glou_opti = []
@@ -29,19 +30,22 @@ class Stats:
                 x += 1
             graphe = Graphes(self.nb_pts, points, self.remplir_matrice(points))
 
-            sommet_depart = np.random.randint(0, graphe.self.nb_pts)
+            sommet_depart = np.random.randint(0, graphe.nb_point)
             graphe_glouton = Glouton(graphe, sommet_depart)
             graphe_opti = OptiGlouton(graphe_glouton)
             graphe_prim = Prim(graphe, sommet_depart)
+            print(graphe_glouton.poids_total == graphe_opti.poids_total)
 
-            res_glou_opti.append((graphe_glouton.poids_total - graphe_opti.poids_total)
-                                 / graphe_glouton.poids_total * 100)
-            res_opti_prim.append((graphe_opti.poids_total - graphe_prim.poids_total)
-                                 / graphe_opti.poids_total * 100)
+            res_glou_opti.append(((graphe_glouton.poids_total - graphe_opti.poids_total)
+                                 / graphe_glouton.poids_total) * 100)
+            res_opti_prim.append(((graphe_opti.poids_total - graphe_prim.poids_total)
+                                 / graphe_opti.poids_total) * 100)
 
             lg.append(graphe_glouton.poids_total)
             lo.append(graphe_opti.poids_total)
             lp.append(graphe_prim.poids_total)
+
+        print(lg == lo)
 
         self.moy_lg = sum(lg) / len(lg)
         self.moy_lo = sum(lo) / len(lo)

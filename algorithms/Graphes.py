@@ -23,7 +23,6 @@ class Graphes:
         :param tab: tableau de l'ordre des points
         :return:longueur du chemin passant par tous les points du tableau
         """
-        print("somme -> ", tab)
         somme = 0
         for i in range(0, self.nb_point-1):
             somme += np.math.sqrt((self.points[tab[i]].x - self.points[tab[i+1]].x)**2 +
@@ -38,7 +37,6 @@ class Graphes:
         """
         sommets = []
         dimensions = sorted(self.matrice_dimension[sommet])
-        # print(self.matrice_dimension[sommet])
         for i in dimensions:
             for j in self.matrice_dimension[sommet]:
                 if i == j:

@@ -9,10 +9,10 @@ class Prim:
         self.nb_point = graphe.nb_point
         self.points = graphe.points
         self.matrice_dimension = graphe.matrice_dimension
-        self.poids_total = 0
         self.sortie_glou = graphe.sortie_glou
         self.sortie_opti = graphe.sortie_opti
         self.matrice_lien = self.pvc_prim(sommet_depart)
+        self.poids_total = self.avoir_poid()
 
     def pvc_prim(self, sommet):
         """
@@ -34,7 +34,6 @@ class Prim:
                     tab_visited.append(x)
                     matrice_lien[r][x] = 1
                     r = x
-                    print(r)
                     s_actuel = len(tab_visited) - 1
                     change = 1
                     break

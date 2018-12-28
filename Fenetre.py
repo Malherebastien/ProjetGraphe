@@ -60,15 +60,15 @@ class Fenetre:
         stat1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         stat1.grid(column=0, row=1)
         stat1.create_text(100, 100, text="Longueur moyenne de glouton :")
-        stat1.create_text(225, 100, text=self.stat.moy_lg)
+        stat1.create_text(250, 100, text=self.stat.moy_lg)
         stat1.create_text(100, 120, text="Longueur moyenne de opti-glouton :")
-        stat1.create_text(225, 120, text=self.stat.moy_lo)
+        stat1.create_text(250, 120, text=self.stat.moy_lo)
         stat1.create_text(100, 140, text="Longueur moyenne de prim :")
-        stat1.create_text(225, 140, text=self.stat.moy_lp)
+        stat1.create_text(250, 140, text=self.stat.moy_lp)
         stat1.create_text(100, 160, text="Pourcentage d'amélioration glouton/opti-glou :")
-        stat1.create_text(225, 160, text=self.stat.amelio_glou_opti)
+        stat1.create_text(250, 160, text=self.stat.amelio_glou_opti)
         stat1.create_text(100, 180, text="Pourcentage d'amélioration opti-glou/prim :")
-        stat1.create_text(225, 180, text=self.stat.amelio_opti_prim)
+        stat1.create_text(250, 180, text=self.stat.amelio_opti_prim)
         return to_fill
 
     def affiche_glouton(self, graphe: Glouton, to_fill):
@@ -130,7 +130,7 @@ class Fenetre:
         e1.insert(0, 100)
         e2 = Entry(to_fill)
         e2.insert(0, 20)
-        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(e1.get(), e2.get(), to_fill))
+        button1 = Button(to_fill, text="Lancer", command=lambda: self.lancer_graphes(int(e1.get()), int(e2.get()), to_fill))
 
         to_fill.create_text(100, 100, text="Nombre d'iterations :")
         to_fill.create_window(225, 100, window=e1)

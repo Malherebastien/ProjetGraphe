@@ -33,7 +33,6 @@ class OptiGlouton:
                 for j in range(0, len(sortie_opti)-1):
                     if abs(i - j) > 1:
                         if self.est_croise(i, j, sortie_opti):
-                            print("application", i, " et ", j)
                             sortie_opti = self.echange_sommet(i, j, sortie_opti)
                             changement += 1
         for i in range(0, self.nb_point-1):
@@ -72,7 +71,6 @@ class OptiGlouton:
         if det1 * det2 < 0 and det3 * det4 < 0:
             l1 = self.graphe.long_chemin(sortie_opti)
             l2 = self.graphe.long_chemin(self.echange_sommet(i, j, sortie_opti))
-            print("l1 = ", l1, " l2 = ", l2)
             if l1 > l2:
                 return 1
         return 0
