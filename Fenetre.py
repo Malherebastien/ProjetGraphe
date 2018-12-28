@@ -1,5 +1,7 @@
 from tkinter import *
 
+from Stats import *
+
 from algorithms.Prim import *
 from algorithms.Glouton import *
 from algorithms.Graphes import *
@@ -14,11 +16,12 @@ class Fenetre:
         :param tab_point: liste des points
         """
         self.fenetre = Tk()
-        self.fenetre.title("In Dubernard we trust")
         self.tab_point = tab_point
         self.color_arc = "red"
 
     def afficher_tout(self, graphe: Graphes):
+        settings = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
+        stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas1 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas2 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         canvas3 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
@@ -26,22 +29,22 @@ class Fenetre:
         stat2 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         stat3 = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
 
+        self.affiche_settings(settings)
+        settings.grid(column=0, row=0)
+
         sommet_depart = np.random.randint(0, graphe.nb_point)
 
         graphe_glouton = Glouton(graphe, sommet_depart)
         self.affiche_glouton(graphe_glouton, canvas1)
-        canvas1.grid(column=0, row=0)
+        canvas1.grid(column=1, row=0)
 
         graphe_opti = OptiGlouton(graphe_glouton)
         self.affiche_opti(graphe_opti, canvas2)
-        canvas2.grid(column=1, row=0)
+        canvas2.grid(column=2, row=0)
 
         prim = Prim(graphe, sommet_depart)
         self.affiche_prim(prim, canvas3)
-        canvas3.grid(column=2, row=0)
-        # bouton = Button(self.fenetre, text="Appliquer opti", command=self.relier_arc_opti(tab_liaisons,
-        # Graphes.optimise_glou(tab_liaisons)))
-        # bouton.pack()
+        canvas3.grid(column=3, row=0)
 
         self.create_stat(graphe, stat1)
         stat1.grid(column=0, row=1)
@@ -104,3 +107,14 @@ class Fenetre:
             to_fill.create_oval(point.x * 300 - 7 + 10, point.y * 300 - 7 + 10, point.x * 300 + 7 + 10,
                                 point.y * 300 + 7 + 10, fill="black")
             to_fill.create_text(point.x * 300 + 10, point.y * 300 + 10, text=point.point_id, fill="white")
+
+    def affiche_settings(self, to_fill):
+        nb_iterations = IntVar()
+        nb_points = IntVar()
+        label1 = Label(to_fill, text="Nombre d'itérations", textvariable=nb_iterations)
+        label2 = Label(to_fill, text="Nombre de points", textvariable=nb_points)
+        button1 = Button(to_fill, text="Lancer", command=self.lancer_graphes(nb_iterations, nb_points))
+        return to_fill
+
+    def lancer_graphes(self, nb_iterations, nb_points):
+            stat = Stats(nb_iterations, nb_points)

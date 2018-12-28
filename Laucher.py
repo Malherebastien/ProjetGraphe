@@ -1,4 +1,4 @@
-from Fenetre import*
+from Fenetre import *
 from algorithms.Graphes import *
 from Stats import *
 import numpy as np
