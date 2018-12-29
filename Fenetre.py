@@ -48,11 +48,11 @@ class Fenetre:
         self.affiche_prim(prim, canvas3)
         canvas3.grid(column=2, row=0)
 
-        self.create_diagram(diagram)
-        diagram.grid(column=1, row=1)
-
         self.create_global_stats(self.stats_global)
         self.stats_global.grid(column=2, row=1)
+
+        self.create_diagram(diagram)
+        diagram.grid(column=1, row=1)
 
         self.fenetre.mainloop()
 
@@ -64,23 +64,25 @@ class Fenetre:
         fig = plt.figure()
 
         x = [1, 2, 3]
-        height = [3, 5, 3]
-        # height = [self.stat.moy_lg, self.stat.moy_lo, self.stat.moy_lp]
+        height = [self.stat.moy_lg, self.stat.moy_lo, self.stat.moy_lp]
         width = 1.0
 
         image_name = 'Diagram.png'
         plt.bar(x, height, width, color='b')
-        plt.savefig(image_name)
+        dpi = 50
+        plt.savefig(image_name, figsize=(320/dpi, 320/dpi), dpi=dpi)
+
+        global im
+        global photo
 
         im = Image.open(image_name)
-
         photo = ImageTk.PhotoImage(im)
 
-        to_fill.create_image(10, 10, image=photo, anchor=NW)
+        to_fill.create_image(0, 0, image=photo, anchor='nw')
+
         return to_fill
 
     def create_global_stats(self, to_fill):
-        to_fill.destroy()
         self.stats_global = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
         self.stats_global.grid(column=2, row=1)
         self.stats_global.create_text(150, 100, text="Longueur moyenne de glouton :")
