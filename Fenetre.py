@@ -32,27 +32,39 @@ class Fenetre:
         diagram = Canvas(self.fenetre, height=320, width=320, borderwidth=3, relief=GROOVE)
 
         self.affiche_settings(settings)
-        settings.grid(column=0, row=1)
+        settings.grid(column=0, row=2)
 
         sommet_depart = np.random.randint(0, graphe.nb_point)
 
         graphe_glouton = Glouton(graphe, sommet_depart)
         self.affiche_glouton(graphe_glouton, canvas1)
-        canvas1.grid(column=0, row=0)
+        canvas1.grid(column=0, row=1)
 
         graphe_opti = OptiGlouton(graphe_glouton)
         self.affiche_opti(graphe_opti, canvas2)
-        canvas2.grid(column=1, row=0)
+        canvas2.grid(column=1, row=1)
 
         prim = Prim(graphe, sommet_depart)
         self.affiche_prim(prim, canvas3)
-        canvas3.grid(column=2, row=0)
+        canvas3.grid(column=2, row=1)
 
         self.create_global_stats(self.stats_global)
-        self.stats_global.grid(column=2, row=1)
+        self.stats_global.grid(column=2, row=2)
 
         self.create_diagram(diagram)
-        diagram.grid(column=1, row=1)
+        diagram.grid(column=1, row=2)
+
+        glouton_name = Canvas(self.fenetre, height=30, width=320, borderwidth=1, relief=GROOVE)
+        glouton_name.create_text(160, 15, text="Glouton", anchor="center", font=("Comic Sans MS", 12, "bold"))
+        glouton_name.grid(column=0, row=0)
+
+        opti_name = Canvas(self.fenetre, height=30, width=320, borderwidth=1, relief=GROOVE)
+        opti_name.create_text(160, 15, text="Glouton Optimisé", anchor="center", font=("Comic Sans MS", 12, "bold"))
+        opti_name.grid(column=1, row=0)
+
+        prim_name = Canvas(self.fenetre, height=30, width=320, borderwidth=1, relief=GROOVE)
+        prim_name.create_text(160, 15, text="Prim", anchor="center", font=("Comic Sans MS", 12, "bold"))
+        prim_name.grid(column=2, row=0)
 
         self.fenetre.mainloop()
 
